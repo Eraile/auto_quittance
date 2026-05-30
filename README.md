@@ -16,7 +16,7 @@
 
 ## ✨ Fonctionnalités
 
-- **Génération par lot** — Glissez-déposez plusieurs templates Word (`.docx`) et générez toutes vos factures en un clic
+- **Génération par lot** — Glissez-déposez plusieurs templates Word (`.docx`) ou Excel (`.xlsx`) et générez toutes vos factures en un clic
 - **Variables dynamiques** — Remplacez automatiquement `{CURRENT_MONTH}`, `{CURRENT_YEAR}`, `{SENDER_NAME}` et bien d'autres dans vos documents
 - **Sélection de période** — Mois précédent, actuel ou suivant en un seul clic
 - **Envoi par e-mail** — Prépare un e-mail avec toutes les pièces jointes directement depuis l'app
