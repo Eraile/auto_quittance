@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoQuittance — Génération automatique de factures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📄</span>
+        <span class="logo-text">AutoQuittance</span>
+      </a>
+      <nav>
+        <a href="index.html" class="nav-link active">Application</a>
+        <a href="tutorial.html" class="nav-link">Tutoriel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== STEP 1: Period ===== -->
+    <section class="card" id="step-period">
+      <h2 class="card-title">
+        <span class="step-badge">1</span>
+        Choisir la période de facturation
+      </h2>
+      <div class="period-buttons">
+        <button class="period-btn" data-offset="-1">
+          <span class="period-label">◀ Mois précédent</span>
+          <span class="period-value" id="preview-prev"></span>
+        </button>
+        <button class="period-btn active" data-offset="0">
+          <span class="period-label">● Mois actuel</span>
+          <span class="period-value" id="preview-current"></span>
+        </button>
+        <button class="period-btn" data-offset="1">
+          <span class="period-label">Mois suivant ▶</span>
+          <span class="period-value" id="preview-next"></span>
+        </button>
+      </div>
+
+      <details class="placeholders-details">
+        <summary>📋 Voir les variables disponibles pour vos templates</summary>
+        <div class="placeholders-grid" id="placeholders-grid"></div>
+        <p class="placeholders-note">
+          💡 Copiez ces variables telles quelles dans votre fichier Word ou Excel.
+          <a href="tutorial.html">Voir le tutoriel complet →</a>
+        </p>
+      </details>
+    </section>
+
+    <!-- ===== STEP 2: Upload ===== -->
+    <section class="card" id="step-upload">
+      <h2 class="card-title">
+        <span class="step-badge">2</span>
+        Charger vos templates
+      </h2>
+      <div class="dropzone" id="dropzone">
+        <div class="dropzone-content">
+          <div class="dropzone-icon">📂</div>
+          <p class="dropzone-text">
+            Glissez-déposez vos fichiers <strong>.docx</strong> ou <strong>.xlsx</strong> ici
+          </p>
+          <label for="file-input" class="browse-btn">Parcourir les fichiers</label>
+          <input type="file" id="file-input" multiple accept=".docx,.xlsx" hidden>
+        </div>
+      </div>
+      <p class="upload-note">Vos fichiers ne quittent jamais votre appareil — tout est traité localement.</p>
+    </section>
+
+    <!-- ===== STEP 3: Files & Recipients ===== -->
+    <section class="card hidden" id="step-recipients">
+      <h2 class="card-title">
+        <span class="step-badge">3</span>
+        Templates chargés &amp; destinataires
+      </h2>
+      <div id="file-list"></div>
+      <p class="recipients-note">Les adresses email sont mémorisées pour la prochaine fois.</p>
+    </section>
+
+    <!-- ===== STEP 4: Prefs & Generate ===== -->
+    <section class="card" id="step-generate">
+      <h2 class="card-title">
+        <span class="step-badge">4</span>
+        Préférences &amp; génération
+      </h2>
+
+      <div class="prefs-grid">
+        <div class="pref-field">
+          <label for="pref-sender-name">
+            Votre nom
+            <span class="pref-hint">→ variable <code>{SENDER_NAME}</code></span>
+          </label>
+          <input type="text" id="pref-sender-name" placeholder="Ex: J.Dupont">
+        </div>
+        <div class="pref-field">
+          <label for="pref-sender-email">Votre email (expéditeur)</label>
+          <input type="email" id="pref-sender-email" placeholder="Ex: vous@email.com">
+        </div>
+        <div class="pref-field">
+          <label for="pref-cc-email">Email en copie (CC)</label>
+          <input type="email" id="pref-cc-email" placeholder="Ex: copie@email.com">
+        </div>
+        <div class="pref-field">
+          <label for="pref-mail-subject">
+            Objet du mail
+            <span class="pref-hint">supports variables</span>
+          </label>
+          <input type="text" id="pref-mail-subject" placeholder="Ex: Factures - {CURRENT_MONTH}">
+        </div>
+        <div class="pref-field pref-full">
+          <label for="pref-mail-body">
+            Corps du mail
+            <span class="pref-hint">supports variables</span>
+          </label>
+          <textarea id="pref-mail-body" rows="5" placeholder="Bonjour,&#10;&#10;Veuillez trouver ci-joint..."></textarea>
+        </div>
+      </div>
+
+      <div class="generate-row">
+        <button class="generate-btn" id="generate-btn" disabled>
+          ⚡ Générer les documents &amp; préparer les envois
+        </button>
+        <p class="generate-hint" id="generate-hint">Ajoutez au moins un template (étape 2) pour continuer.</p>
+      </div>
+    </section>
+
+    <!-- ===== STEP 5: Results ===== -->
+    <section class="card hidden" id="step-results">
+      <h2 class="card-title">✅ Documents générés</h2>
+      <div id="results-content"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">AutoQuittance</span>
+      <a href="tutorial.html">Comment créer un template ?</a>
+      <a href="http://www.nomercy-studios.com/" target="_blank" rel="noopener" class="footer-studio">⚡ NomerCy Studios</a>
+      <span class="footer-privacy">🔒 Vos données restent sur votre appareil.</span>
+    </div>
+  </footer>
+
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title">
+    <div class="modal">
+      <div class="modal-header">
+        <span id="preview-modal-title" class="modal-title">Aperçu</span>
+        <div class="modal-header-actions">
+          <button class="modal-dl-btn" id="modal-dl-btn">⬇ Télécharger</button>
+          <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+        </div>
+      </div>
+      <div class="modal-body" id="preview-body"></div>
+    </div>
+  </div>
+
+  <!-- CDN Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/pizzip@3.1.7/dist/pizzip.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.3.2/dist/docx-preview.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

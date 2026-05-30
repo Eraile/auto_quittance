@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutoriel — AutoQuittance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📄</span>
+        <span class="logo-text">AutoQuittance</span>
+      </a>
+      <nav>
+        <a href="index.html" class="nav-link">Application</a>
+        <a href="tutorial.html" class="nav-link active">Tutoriel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tutorial-main">
+
+    <!-- Hero -->
+    <div class="tutorial-hero">
+      <h1>📖 Comment créer un template ?</h1>
+      <p>
+        Transformez n'importe quelle facture existante en template réutilisable.
+        Il suffit de remplacer les valeurs qui changent chaque mois par des variables.
+      </p>
+    </div>
+
+    <!-- Table of contents -->
+    <nav class="toc">
+      <h3>Sommaire</h3>
+      <ol>
+        <li><a href="#principe">Le principe des variables</a></li>
+        <li><a href="#word">Créer un template Word (.docx)</a></li>
+        <li><a href="#excel">Créer un template Excel (.xlsx)</a></li>
+        <li><a href="#variables">Toutes les variables disponibles</a></li>
+        <li><a href="#conseils">Conseils &amp; erreurs fréquentes</a></li>
+      </ol>
+    </nav>
+
+    <!-- Section 1: Principe -->
+    <section class="tutorial-section" id="principe">
+      <h2>1. Le principe des variables</h2>
+      <p>
+        Une variable est un texte de la forme <code>{NOM_VARIABLE}</code> que vous tapez
+        dans votre fichier. Lors de la génération, AutoQuittance remplace automatiquement
+        ces variables par les valeurs du mois sélectionné.
+      </p>
+      <p><strong>Exemple :</strong></p>
+      <div class="step-block">
+        <div class="step-number">📄</div>
+        <div class="step-content">
+          <strong>Dans votre template Word ou Excel, vous écrivez :</strong>
+          Facture de loyer — <code>{CURRENT_MONTH}</code>
+        </div>
+      </div>
+      <div class="step-block">
+        <div class="step-number">✅</div>
+        <div class="step-content">
+          <strong>AutoQuittance génère :</strong>
+          Facture de loyer — JUIN 2026
+        </div>
+      </div>
+      <p>
+        C'est tout. Pas besoin d'installer quoi que ce soit.
+        Vos fichiers originaux ne sont jamais modifiés.
+      </p>
+    </section>
+
+    <!-- Section 2: Word -->
+    <section class="tutorial-section" id="word">
+      <h2>2. Créer un template Word (.docx)</h2>
+
+      <div class="step-block">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <strong>Ouvrez votre dernière facture dans Word</strong>
+          Faites une copie du fichier et renommez-la en quelque chose comme
+          <em>TEMPLATE_LOYER_BUREAU.docx</em>.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <strong>Repérez les valeurs qui changent chaque mois</strong>
+          En général : le mois dans le titre, la plage de dates, parfois le numéro de facture.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <strong>Remplacez ces valeurs par les variables correspondantes</strong>
+          Par exemple, remplacez <em>"mai 2026"</em> par <code>{CURRENT_MONTH_LOWER}</code>,
+          ou <em>"du 01/05/2026 au 31/05/2026"</em> par <code>{CURRENT_MONTH_DAYS_RANGE}</code>.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <strong>Sauvegardez et chargez dans AutoQuittance</strong>
+          Glissez-déposez votre template sur la page principale.
+        </div>
+      </div>
+
+      <div class="tip-box">
+        💡 <strong>Astuce :</strong> utilisez Ctrl+H (Rechercher/Remplacer) dans Word pour
+        remplacer toutes les occurrences d'une valeur en une seule opération.
+      </div>
+
+      <div class="warning-box">
+        ⚠️ <strong>Important :</strong> tapez la variable <em>en un seul geste</em>, sans
+        changer de police ou de couleur au milieu. Si Word split le texte entre plusieurs
+        blocs internes (ce qui arrive parfois après correction automatique), la variable
+        ne sera pas reconnue. En cas de problème, supprimez la variable et retapez-la.
+      </div>
+    </section>
+
+    <!-- Section 3: Excel -->
+    <section class="tutorial-section" id="excel">
+      <h2>3. Créer un template Excel (.xlsx)</h2>
+
+      <div class="step-block">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <strong>Ouvrez votre dernière facture dans Excel</strong>
+          Faites une copie et renommez-la en <em>TEMPLATE_LOYER_GARAGE.xlsx</em>.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <strong>Identifiez les cellules contenant des valeurs mensuelles</strong>
+          Typiquement : le titre en haut, la période, la date d'émission.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <strong>Cliquez sur la cellule et remplacez le texte par une variable</strong>
+          Par exemple, si la cellule A1 contient <em>"MAI 2026"</em>,
+          remplacez-la par <code>{CURRENT_MONTH}</code>.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <strong>Les formules sont préservées</strong>
+          Seules les cellules texte (non-formule) contenant vos variables seront modifiées.
+          Vos formules de calcul restent intactes.
+        </div>
+      </div>
+
+      <div class="tip-box">
+        💡 <strong>Astuce :</strong> vous pouvez combiner une variable avec du texte fixe
+        dans la même cellule. Par exemple : <code>Facture n°{MONTH_NUMBER}-{YEAR}</code>
+        donnera <em>Facture n°06-2026</em>.
+      </div>
+
+      <div class="warning-box">
+        ⚠️ <strong>Note :</strong> les cellules qui contiennent des formules (commençant
+        par <code>=</code>) ne sont pas modifiées. Seules les cellules de type texte pur
+        sont traitées.
+      </div>
+    </section>
+
+    <!-- Section 4: Variables reference -->
+    <section class="tutorial-section" id="variables">
+      <h2>4. Toutes les variables disponibles</h2>
+      <p>
+        Ces exemples correspondent au mois de <strong>juin 2026</strong>.
+        Les valeurs réelles dépendent du mois que vous sélectionnez dans l'application.
+      </p>
+
+      <table class="placeholder-table">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+            <th>Exemple (juin 2026)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="section-header">
+            <td colspan="3">— Mois sélectionné —</td>
+          </tr>
+          <tr>
+            <td><code>{CURRENT_MONTH}</code></td>
+            <td>Mois et année en majuscules</td>
+            <td>JUIN 2026</td>
+          </tr>
+          <tr>
+            <td><code>{CURRENT_MONTH_LOWER}</code></td>
+            <td>Mois et année en minuscules</td>
+            <td>juin 2026</td>
+          </tr>
+          <tr>
+            <td><code>{CURRENT_MONTH_HEADLINE}</code></td>
+            <td>Format "1er Mois Année"</td>
+            <td>1er juin 2026</td>
+          </tr>
+          <tr>
+            <td><code>{CURRENT_MONTH_DAYS_RANGE}</code></td>
+            <td>Plage complète du mois</td>
+            <td>du 01/06/2026 au 30/06/2026</td>
+          </tr>
+          <tr>
+            <td><code>{DATE_RANGE}</code></td>
+            <td>Alias de la variable ci-dessus</td>
+            <td>du 01/06/2026 au 30/06/2026</td>
+          </tr>
+          <tr>
+            <td><code>{MONTH_NAME}</code></td>
+            <td>Nom du mois seul (minuscules)</td>
+            <td>juin</td>
+          </tr>
+          <tr>
+            <td><code>{MONTH_NAME_UPPER}</code></td>
+            <td>Nom du mois seul (majuscules)</td>
+            <td>JUIN</td>
+          </tr>
+          <tr>
+            <td><code>{MONTH_NUMBER}</code></td>
+            <td>Numéro du mois (2 chiffres)</td>
+            <td>06</td>
+          </tr>
+          <tr>
+            <td><code>{YEAR}</code></td>
+            <td>Année seule</td>
+            <td>2026</td>
+          </tr>
+          <tr>
+            <td><code>{FIRST_DAY}</code></td>
+            <td>Premier jour du mois</td>
+            <td>01/06/2026</td>
+          </tr>
+          <tr>
+            <td><code>{LAST_DAY}</code></td>
+            <td>Dernier jour du mois</td>
+            <td>30/06/2026</td>
+          </tr>
+
+          <tr class="section-header">
+            <td colspan="3">— Mois précédent —</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_MONTH}</code></td>
+            <td>Mois précédent (majuscules)</td>
+            <td>MAI 2026</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_MONTH_LOWER}</code></td>
+            <td>Mois précédent (minuscules)</td>
+            <td>mai 2026</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_MONTH_NAME}</code></td>
+            <td>Nom du mois précédent seul</td>
+            <td>mai</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_MONTH_NUMBER}</code></td>
+            <td>Numéro du mois précédent</td>
+            <td>05</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_YEAR}</code></td>
+            <td>Année du mois précédent</td>
+            <td>2026</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_FIRST_DAY}</code></td>
+            <td>Premier jour du mois précédent</td>
+            <td>01/05/2026</td>
+          </tr>
+          <tr>
+            <td><code>{PREV_LAST_DAY}</code></td>
+            <td>Dernier jour du mois précédent</td>
+            <td>31/05/2026</td>
+          </tr>
+
+          <tr class="section-header">
+            <td colspan="3">— Mois suivant —</td>
+          </tr>
+          <tr>
+            <td><code>{NEXT_MONTH}</code></td>
+            <td>Mois suivant (majuscules)</td>
+            <td>JUILLET 2026</td>
+          </tr>
+          <tr>
+            <td><code>{NEXT_MONTH_LOWER}</code></td>
+            <td>Mois suivant (minuscules)</td>
+            <td>juillet 2026</td>
+          </tr>
+          <tr>
+            <td><code>{NEXT_MONTH_NAME}</code></td>
+            <td>Nom du mois suivant seul</td>
+            <td>juillet</td>
+          </tr>
+          <tr>
+            <td><code>{NEXT_FIRST_DAY}</code></td>
+            <td>Premier jour du mois suivant</td>
+            <td>01/07/2026</td>
+          </tr>
+          <tr>
+            <td><code>{NEXT_LAST_DAY}</code></td>
+            <td>Dernier jour du mois suivant</td>
+            <td>31/07/2026</td>
+          </tr>
+          <tr>
+            <td><code>{NEXT_YEAR}</code></td>
+            <td>Année du mois suivant</td>
+            <td>2026</td>
+          </tr>
+
+          <tr class="section-header">
+            <td colspan="3">— Aujourd'hui —</td>
+          </tr>
+          <tr>
+            <td><code>{TODAY}</code></td>
+            <td>Date du jour (JJ/MM/AAAA)</td>
+            <td>30/05/2026</td>
+          </tr>
+          <tr>
+            <td><code>{TODAY_YEAR}</code></td>
+            <td>Année en cours</td>
+            <td>2026</td>
+          </tr>
+
+          <tr class="section-header">
+            <td colspan="3">— Expéditeur (depuis vos préférences) —</td>
+          </tr>
+          <tr>
+            <td><code>{SENDER_NAME}</code></td>
+            <td>Votre nom (renseigné dans l'étape 4)</td>
+            <td>J.Dupont</td>
+          </tr>
+          <tr>
+            <td><code>{SENDER_EMAIL}</code></td>
+            <td>Votre email (renseigné dans l'étape 4)</td>
+            <td>vous@email.com</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 5: Tips -->
+    <section class="tutorial-section" id="conseils">
+      <h2>5. Conseils &amp; erreurs fréquentes</h2>
+
+      <h3>✅ Bonnes pratiques</h3>
+      <ul>
+        <li>
+          Nommez vos templates de façon explicite :
+          <em>TEMPLATE_LOYER_BUREAU.xlsx</em>, <em>TEMPLATE_CABINET.docx</em>…
+          L'application mémorise l'email associé à chaque nom de fichier.
+        </li>
+        <li>
+          Vérifiez le résultat sur le premier mois avant de multiplier les templates.
+        </li>
+        <li>
+          Sélectionnez <strong>"Mois suivant"</strong> si vous préparez les factures
+          en avance en fin de mois.
+        </li>
+        <li>
+          Ajoutez votre propre email en <strong>CC</strong> (étape 4) pour garder
+          une trace des envois dans votre boîte.
+        </li>
+      </ul>
+
+      <h3>❌ Erreurs fréquentes</h3>
+
+      <div class="warning-box">
+        <strong>La variable n'est pas remplacée dans le .docx</strong><br>
+        Cause probable : Word a séparé le texte de la variable en plusieurs segments
+        internes (visible si vous copiez-collez depuis un autre document ou changez le
+        formatage mid-variable). Solution : supprimez la variable et retapez-la à la main
+        depuis zéro, en un seul bloc, sans rien sélectionner au milieu.
+      </div>
+
+      <div class="warning-box">
+        <strong>Les accolades <code>{</code> <code>}</code> restent dans le document généré</strong><br>
+        Vérifiez l'orthographe exacte de la variable (respect des majuscules, des underscores).
+        La liste complète est dans la section 4 ci-dessus.
+      </div>
+
+      <div class="warning-box">
+        <strong>Le fichier téléchargé ne s'ouvre pas</strong><br>
+        Cela arrive rarement avec certains xlsx complexes (macros, connexions de données).
+        Simplifiez le template en retirant les fonctionnalités avancées et réessayez.
+      </div>
+
+      <div class="tip-box">
+        💡 <strong>Rappel :</strong> tout le traitement est effectué dans votre navigateur.
+        Aucun fichier n'est envoyé sur internet. Vos documents restent confidentiels.
+      </div>
+
+      <h3>📧 À propos de l'envoi de mails</h3>
+      <p>
+        AutoQuittance génère un lien <strong>mailto:</strong> qui ouvre votre client mail
+        habituel (Outlook, Thunderbird, Apple Mail…) avec l'objet et le corps pré-remplis.
+        Il vous reste à attacher les fichiers téléchargés et à cliquer sur Envoyer.
+      </p>
+      <p>
+        Cette approche garantit que vos mots de passe ne sont jamais partagés avec
+        une application tierce.
+      </p>
+    </section>
+
+    <div style="text-align:center;margin:2rem 0;">
+      <a href="index.html" class="generate-btn" style="display:inline-block;text-decoration:none">
+        ← Retour à l'application
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">AutoQuittance</span>
+      <a href="index.html">← Retour à l'application</a>
+      <a href="http://www.nomercy-studios.com/" target="_blank" rel="noopener" class="footer-studio">⚡ NomerCy Studios</a>
+      <span class="footer-privacy">🔒 Vos données restent sur votre appareil.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
