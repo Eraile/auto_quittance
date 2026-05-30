@@ -624,8 +624,19 @@ footer {
   font-weight: 600;
   color: var(--primary);
   transition: color .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  text-decoration: none;
 }
-.footer-studio:hover { color: var(--primary-dark); }
+.footer-studio:hover { color: var(--primary-dark); text-decoration: none; }
+.footer-flag {
+  height: 16px;
+  width: auto;
+  border-radius: 2px;
+  vertical-align: middle;
+  display: inline-block;
+}
 
 /* ---------- Tutorial page ---------- */
 .tutorial-main {
