@@ -624,9 +624,6 @@ footer {
   font-weight: 600;
   color: var(--primary);
   transition: color .15s;
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
   text-decoration: none;
 }
 .footer-studio:hover { color: var(--primary-dark); text-decoration: none; }
@@ -637,6 +634,14 @@ footer {
   vertical-align: middle;
   display: inline-block;
 }
+.footer-made {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+.footer-sep { color: var(--text-light); }
 
 /* ---------- Tutorial page ---------- */
 .tutorial-main {
