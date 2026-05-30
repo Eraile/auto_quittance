@@ -27,7 +27,7 @@
 
 1. Ouvrez l'application sur **[eraile.github.io/auto_quittance](https://eraile.github.io/auto_quittance/)**
 2. Choisissez la **période de facturation** (mois précédent / actuel / suivant)
-3. **Glissez-déposez** vos templates `.docx` dans la zone de dépôt
+3. **Glissez-déposez** vos templates `.docx` (Word) ou `.xlsx` (Excel) dans la zone de dépôt
 4. Renseignez vos **préférences** (nom, e-mail, modèle de message)
 5. Cliquez sur **Générer & Télécharger** — vos factures sont prêtes !
 
@@ -36,8 +36,8 @@
 | Technologie | Rôle |
 |---|---|
 | HTML / CSS / JS vanilla | Interface & logique applicative |
-| [docxtemplater](https://docxtemplater.com/) | Remplacement de variables dans les `.docx` |
-| [JSZip](https://stuk.github.io/jszip/) | Manipulation des fichiers ZIP/docx côté client |
+| [docxtemplater](https://docxtemplater.com/) | Remplacement de variables dans les `.docx` et `.xlsx` |
+| [JSZip](https://stuk.github.io/jszip/) | Manipulation des fichiers ZIP/docx/xlsx côté client |
 
 ## 📁 Structure du projet
 
