@@ -58,6 +58,8 @@ Toutes les opérations se font **localement dans votre navigateur**. Aucun fichi
 
 <div align="center">
 
-Fait avec ❤️ • [Voir l'app en ligne](https://eraile.github.io/auto_quittance/)
+🏴 Fait avec ❤️ au Pays Basque — [Voir l'app en ligne](https://eraile.github.io/auto_quittance/)
+
+© 2026 [NoMercy Studios](http://www.nomercy-studios.com/) • 🔒 Vos données restent sur votre appareil.
 
 </div>
